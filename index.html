@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tazas Personalizadas - Unionistas CF</title>
+    <title>Catálogo Merchandream - Unionistas CF</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
     <style>
         :root {
-            --primary: #8B0000; /* Rojo oscuro - Unionistas CF */
+            --primary: #8B0000;
+            /* Rojo oscuro - Unionistas CF */
             --primary-dark: #5a0000;
             --primary-light: #b30000;
-            --accent: #FFD700; /* Dorado */
+            --accent: #FFD700;
+            /* Dorado */
             --white: #ffffff;
             --light-bg: #f8f9fa;
             --text-dark: #343a40;
@@ -24,6 +27,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -33,7 +37,10 @@
             line-height: 1.6;
         }
 
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             font-weight: 700;
             margin-bottom: 1rem;
         }
@@ -233,6 +240,48 @@
             border-radius: 2px;
         }
 
+        /* Category Navigation */
+        .category-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 3rem;
+        }
+
+        .category-nav-button {
+            background-color: var(--light-bg);
+            color: var(--primary-dark);
+            padding: 10px 20px;
+            border: 1px solid var(--primary);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .category-nav-button:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(139, 0, 0, 0.2);
+        }
+
+        /* Category Section */
+        .category-section {
+            padding-top: 2rem;
+            /* Para compensar el ancla */
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -265,8 +314,14 @@
         .product-image img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
+            /* Cambiado a cover para placeholders */
             transition: var(--transition);
+        }
+
+        /* Estilo específico para las tazas/bidones para que se vean bien */
+        .product-image.object-fit-contain img {
+            object-fit: contain;
         }
 
         .product-card:hover .product-image img {
@@ -285,10 +340,20 @@
             margin-bottom: 0.5rem;
         }
 
-        .product-info .capacity {
-            color: var(--primary);
-            font-weight: 600;
+        .product-info .details-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
             margin-bottom: 0.5rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+        }
+
+        .product-info .capacity,
+        .product-info .min-units {
+            font-weight: 600;
+            color: var(--primary);
         }
 
         .product-info p {
@@ -484,11 +549,17 @@
             margin-bottom: 1rem;
         }
 
-        .modal-product-info .capacity {
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 1rem;
+        .modal-product-info .modal-details-line {
             font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .modal-product-info .modal-capacity,
+        .modal-product-info .modal-min-units {
+            font-weight: 700;
+            color: var(--primary);
         }
 
         .modal-product-info p {
@@ -639,6 +710,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header>
@@ -656,9 +728,10 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
-            <h1>Tazas Personalizadas Unionistas CF</h1>
-            <p>Descubre nuestra exclusiva colección de tazas personalizadas para los mayores fans del Unionistas CF. Perfectas para regalar a socios, jugadores o para tu colección personal.</p>
-            <div class="personalization-badge">¡Totalmente personalizables con el escudo del club!</div>
+            <h1>Catálogo de Merchandising Unionistas CF</h1>
+            <p>Descubre nuestro catálogo completo de productos oficiales para Unionistas CF. Desde tazas y balones hasta
+                sets de regalo, todo personalizable para el club.</p>
+            <div class="personalization-badge">¡Productos oficiales totalmente personalizables!</div>
         </div>
     </section>
 
@@ -669,11 +742,11 @@
             <div class="notes-grid">
                 <div class="note-card">
                     <h3>Plazo de Entrega</h3>
-                    <p>15 días desde la aprobación del diseño</p>
+                    <p>15 días desde la aprobación del diseño (consultar para productos específicos)</p>
                 </div>
                 <div class="note-card">
                     <h3>Precios</h3>
-                    <p>Sin IVA y ya incluye el precio de la sublimación</p>
+                    <p>Sin IVA. El precio final incluye la personalización (sublimación, serigrafía, etc.)</p>
                 </div>
                 <div class="note-card">
                     <h3>Forma de Pago</h3>
@@ -686,9 +759,16 @@
     <!-- Products Section -->
     <section class="products-section" id="productos">
         <div class="container">
-            <h2 class="section-title">Nuestra Colección de Tazas</h2>
-            <div class="products-grid" id="productsGrid">
-                <!-- Products will be populated by JavaScript -->
+            <h2 class="section-title">Nuestro Catálogo</h2>
+
+            <!-- Category Navigation -->
+            <div class="category-nav" id="categoryNav">
+                <!-- Botones de navegación se insertarán aquí -->
+            </div>
+
+            <!-- Product categories will be populated by JavaScript -->
+            <div id="catalogueContainer">
+                <!-- Las secciones de categoría se insertarán aquí -->
             </div>
         </div>
     </section>
@@ -696,9 +776,12 @@
     <!-- Contact Section -->
     <section class="contact-section">
         <div class="container">
-            <h2>¿Te interesa algún modelo?</h2>
-            <p>Contacta con nosotros para recibir información sobre precios, cantidades mínimas y opciones de personalización. Trabajamos directamente con el club para crear productos oficiales de máxima calidad.</p>
-            <a href="mailto:direccion.general@merchandream.es?subject=Consulta sobre Tazas Unionistas CF&body=Hola, me interesa recibir información sobre las tazas personalizadas para Unionistas CF.%0D%0A%0D%0AEstoy interesado en el siguiente modelo:%0D%0A%0D%0ACantidad aproximada:%0D%0A%0D%0AInformación adicional:%0D%0A" class="cta-button">Solicitar Información</a>
+            <h2>¿Te interesa algún producto?</h2>
+            <p>Contacta con nosotros para recibir información sobre precios, cantidades mínimas y opciones de
+                personalización. Trabajamos directamente con el club para crear productos oficiales de máxima calidad.
+            </p>
+            <a href="mailto:direccion.general@merchandream.es?subject=Consulta sobre Catálogo Unionistas CF&body=Hola, me interesa recibir información sobre los siguientes productos para Unionistas CF.%0D%0A%0D%0AEstoy interesado en:%0D%0A%0D%0ACantidad aproximada:%0D%0A%0D%0AInformación adicional:%0D%0A"
+                class="cta-button">Solicitar Información</a>
         </div>
     </section>
 
@@ -731,126 +814,812 @@
     </footer>
 
     <script>
-        // Product data for Unionistas CF
-        const products = [
+        // --- ESTRUCTURA DE DATOS DEL CATÁLOGO ---
+        const catalogueData = [
             {
-                id: 1,
-                name: "Kantol",
-                description: "Metal 7.9cm | 72g por Unidad | Caja Master 52x46x20cm 6kg",
-                capacity: "380ml",
-                price: 3,
-                images: [
-                    "./assets/01.Kantol/Pic01.png",
-                    "./assets/01.Kantol/Pic02.png",
-                    "./assets/01.Kantol/Pic03.png",
-                    "./assets/01.Kantol/Pic05.png",
-                    "./assets/01.Kantol/Caracteristicas.png"
+                id: "balon",
+                categoryName: "1. Balón",
+                requiresCapacity: false,
+                products: [
+                    {
+                        id: 101,
+                        name: "Horisun",
+                        description: "Producto PU/PVC | 400 gr | Embalaje: 50x40x40 cm - 16.5 kg",
+                        minUnits: 100,
+                        price: 15.50,
+                        images: [
+                            "./assets/01.Balones/1.Horisun/Pic01.png",
+                            "./assets/01.Balones/1.Horisun/Pic02.png",
+                            "./assets/01.Balones/1.Horisun/Pic03.png"
+                        ]
+                    }
                 ]
             },
             {
-                id: 2,
-                name: "Werdan",
-                description: "Cerámica 9.6cm | 320g por Unidad | Caja Master 48x33x28cm 14kg",
-                capacity: "350ml",
-                price: 2.85,
-                images: [
-                    "./assets/02.Wesdarm/Pic01.png",
-                    "./assets/02.Wesdarm/Pic02.png",
-                    "./assets/02.Wesdarm/Pic03.png",
-                    "./assets/02.Wesdarm/Pic04.png",
-                    "./assets/02.Wesdarm/Pic05.png",
-                    "./assets/02.Wesdarm/Caracteristicas.png"
+                id: "sets",
+                categoryName: "2. Sets",
+                requiresCapacity: false,
+                products: [
+                    {
+                        id: 201,
+                        name: "Lowchen",
+                        description: "Medidas: 20x1.7x7.5 cm | Peso: 35g",
+                        minUnits: 150,
+                        price: 1.98,
+                        images: [
+                            "./assets/02.Sets/07.LOWCHEN/Pic01.png",
+                            "./assets/02.Sets/07.LOWCHEN/Pic02.png",
+                            "./assets/02.Sets/07.LOWCHEN/Pic03.png",
+                            "./assets/02.Sets/07.LOWCHEN/Pic04.png",
+                            "./assets/02.Sets/07.LOWCHEN/Pic05.png",
+                            "./assets/02.Sets/07.LOWCHEN/Pic06.png",
+                            "./assets/02.Sets/07.LOWCHEN/Pic07.png",
+                            "./assets/02.Sets/07.LOWCHEN/Pic08.png",
+                            "./assets/02.Sets/07.LOWCHEN/Pic09.png"
+                        ]
+                    },
+                    {
+                        id: 202,
+                        name: "Dickinson",
+                        description: "Set Térmico Completo | Bidón 500ml & 2 Vasos 300ml | Acero Inox + Detalles Bambú | Cierre Presión | Caja Premium",
+                        minUnits: 100,
+                        price: 23.70,
+                        images: [
+                            "./assets/02.Sets/01.DICKINSON/Pic05.png",
+                            "./assets/02.Sets/01.DICKINSON/Pic01.png",
+                            "./assets/02.Sets/01.DICKINSON/Pic02.png",
+                            "./assets/02.Sets/01.DICKINSON/Pic03.png",
+                            "./assets/02.Sets/01.DICKINSON/Pic04.png",
+                            "./assets/02.Sets/01.DICKINSON/Pic06.png",
+                            "./assets/02.Sets/01.DICKINSON/Pic07.png",
+                            "./assets/02.Sets/01.DICKINSON/Pic08.png",
+                            "./assets/02.Sets/01.DICKINSON/Pic09.png",
+                            "./assets/02.Sets/01.DICKINSON/Pic10.png",
+                            "./assets/02.Sets/01.DICKINSON/Pic11.png"
+                        ]
+                    },
+                    {
+                        id: 203,
+                        name: "Neolux",
+                        description: "Set Regalo Premium | Vaso Térmico 550ml Acero Inox Reciclado/Corcho + Paraguas Negro RPET | Materiales Sostenibles | Estuche de Lujo",
+                        minUnits: 100,
+                        price: 22.70,
+                        images: [
+                            "./assets/02.Sets/02.NEOLUX/Pic08.png",
+                            "./assets/02.Sets/02.NEOLUX/Pic01.png",
+                            "./assets/02.Sets/02.NEOLUX/Pic02.png",
+                            "./assets/02.Sets/02.NEOLUX/Pic03.png",
+                            "./assets/02.Sets/02.NEOLUX/Pic04.png",
+                            "./assets/02.Sets/02.NEOLUX/Pic05.png",
+                            "./assets/02.Sets/02.NEOLUX/Pic06.png",
+                            "./assets/02.Sets/02.NEOLUX/Pic07.png",
+                            "./assets/02.Sets/02.NEOLUX/Pic09.png",
+                            "./assets/02.Sets/02.NEOLUX/Pic10.png",
+                            "./assets/02.Sets/02.NEOLUX/Pic11.png",
+                            "./assets/02.Sets/02.NEOLUX/Pic12.png"
+                        ]
+                    },
+                    {
+                        id: 204,
+                        name: "Gregory",
+                        description: "Set Premium Regalo Sostenible | Termo 500ml Acero Reciclado + Paraguas RPET + Bloc Notas RPET + Bolígrafo RPET | Estuche Presentación Mate",
+                        minUnits: 100,
+                        price: 36.40,
+                        images: [
+                            "./assets/02.Sets/03.GREGORY/Pic11.png",
+                            "./assets/02.Sets/03.GREGORY/Pic01.png",
+                            "./assets/02.Sets/03.GREGORY/Pic02.png",
+                            "./assets/02.Sets/03.GREGORY/Pic03.png",
+                            "./assets/02.Sets/03.GREGORY/Pic04.png",
+                            "./assets/02.Sets/03.GREGORY/Pic05.png",
+                            "./assets/02.Sets/03.GREGORY/Pic06.png",
+                            "./assets/02.Sets/03.GREGORY/Pic07.png",
+                            "./assets/02.Sets/03.GREGORY/Pic08.png",
+                            "./assets/02.Sets/03.GREGORY/Pic09.png",
+                            "./assets/02.Sets/03.GREGORY/Pic10.png",
+                            "./assets/02.Sets/03.GREGORY/Pic12.png",
+                            "./assets/02.Sets/03.GREGORY/Pic13.png",
+                            "./assets/02.Sets/03.GREGORY/Pic14.png",
+                            "./assets/02.Sets/03.GREGORY/Pic15.png",
+                            "./assets/02.Sets/03.GREGORY/Pic16.png",
+                            "./assets/02.Sets/03.GREGORY/Pic17.png",
+                            "./assets/02.Sets/03.GREGORY/Pic18.png"
+                        ]
+                    },
+                    {
+                        id: 205,
+                        name: "Webermax",
+                        description: "Set Escritura Eco | Bloc Fieltro RPET/Corcho 80h + Bolígrafo Aluminio Reciclado | Incluye Marcapáginas | Caja Presentación",
+                        minUnits: 100,
+                        price: 5.50,
+                        images: [
+                            "./assets/02.Sets/04.WEBERMAX/Pic06.png",
+                            "./assets/02.Sets/04.WEBERMAX/Pic01.png",
+                            "./assets/02.Sets/04.WEBERMAX/Pic02.png",
+                            "./assets/02.Sets/04.WEBERMAX/Pic03.png",
+                            "./assets/02.Sets/04.WEBERMAX/Pic04.png",
+                            "./assets/02.Sets/04.WEBERMAX/Pic05.png",
+                            "./assets/02.Sets/04.WEBERMAX/Pic06.png",
+                            "./assets/02.Sets/04.WEBERMAX/Pic07.png",
+                            "./assets/02.Sets/04.WEBERMAX/Pic08.png",
+                            "./assets/02.Sets/04.WEBERMAX/Pic09.png"
+                        ]
+                    },
+                    {
+                        id: 206,
+                        name: "Patrick",
+                        description: "Set Oficina Corcho Natural | Bloc 80 Hojas + Bolígrafo + Llavero USB 16GB | Materiales Sostenibles | Estuche Kraft",
+                        minUnits: 100,
+                        price: 12.25,
+                        images: [
+                            "./assets/02.Sets/05.PATRICK/Pic07.png",
+                            "./assets/02.Sets/05.PATRICK/Pic01.png",
+                            "./assets/02.Sets/05.PATRICK/Pic02.png",
+                            "./assets/02.Sets/05.PATRICK/Pic03.png",
+                            "./assets/02.Sets/05.PATRICK/Pic04.png",
+                            "./assets/02.Sets/05.PATRICK/Pic05.png",
+                            "./assets/02.Sets/05.PATRICK/Pic06.png",
+                            "./assets/02.Sets/05.PATRICK/Pic08.png",
+                            "./assets/02.Sets/05.PATRICK/Pic09.png",
+                            "./assets/02.Sets/05.PATRICK/Pic10.png",
+                            "./assets/02.Sets/05.PATRICK/Pic11.png",
+                            "./assets/02.Sets/05.PATRICK/Pic12.png",
+                            "./assets/02.Sets/05.PATRICK/Pic13.png",
+                            "./assets/02.Sets/05.PATRICK/Pic14.png",
+                            "./assets/02.Sets/05.PATRICK/Pic15.png",
+                            "./assets/02.Sets/05.PATRICK/Pic16.png",
+                        ]
+                    },
+                    {
+                        id: 207,
+                        name: "JAYON",
+                        description: "Set Regalo RPET Negro | Bolígrafo Giratorio + Llavero | Material Reciclado | Estuche Premium",
+                        minUnits: 100,
+                        price: 5.75,
+                        images: [
+                            "./assets/02.Sets/06.JAYON/Pic05.png",
+                            "./assets/02.Sets/06.JAYON/Pic01.png",
+                            "./assets/02.Sets/06.JAYON/Pic02.png",
+                            "./assets/02.Sets/06.JAYON/Pic03.png",
+                            "./assets/02.Sets/06.JAYON/Pic04.png",
+                            "./assets/02.Sets/06.JAYON/Pic06.png",
+                            "./assets/02.Sets/06.JAYON/Pic07.png",
+                            "./assets/02.Sets/06.JAYON/Pic08.png",
+                            "./assets/02.Sets/06.JAYON/Pic09.png",
+                            "./assets/02.Sets/06.JAYON/Pic10.png",
+                            "./assets/02.Sets/06.JAYON/Pic11.png"
+                        ]
+                    }
                 ]
             },
             {
-                id: 3,
-                name: "Harnet",
-                description: "Cerámica 9.6cm | 320g por Unidad | Caja Master 48x32x27.5cm 13kg",
-                capacity: "350ml",
-                price: 2.95,
-                images: [
-                    "./assets/03.Harnet/Pic01.png",
-                    "./assets/03.Harnet/Pic02.png",
-                    "./assets/03.Harnet/Pic03.png",
-                    "./assets/03.Harnet/Caracteristicas.png"
+                id: "agendas",
+                categoryName: "3. Agendas",
+                requiresCapacity: false,
+                products: [
+                    {
+                        id: 301,
+                        name: "Flinex",
+                        description: "Artículo Corcho 15x2.5x21 cm | 495 gr",
+                        minUnits: 100,
+                        price: 4.06,
+                        images: [
+                            "./assets/03.Agendas/01.FLINEX/Pic02.png",
+                            "./assets/03.Agendas/01.FLINEX/Pic01.png",
+                            "./assets/03.Agendas/01.FLINEX/Pic03.png",
+                            "./assets/03.Agendas/01.FLINEX/Pic04.png",
+                            "./assets/03.Agendas/01.FLINEX/Pic05.png"
+                        ]
+                    },
+                    {
+                        id: 302,
+                        name: "Florian",
+                        description: "Cartón Reciclado | Medidas 15x2.2x21 cm | Peso 240 gr | Solo queda color marrón",
+                        minUnits: 100,
+                        price: 3.70,
+                        images: [
+                            "./assets/03.Agendas/02.FLORIAN/Pic01.png",
+                            "./assets/03.Agendas/02.FLORIAN/Pic02.png",
+                            "./assets/03.Agendas/02.FLORIAN/Pic03.png",
+                            "./assets/03.Agendas/02.FLORIAN/Pic04.png",
+                            "./assets/03.Agendas/02.FLORIAN/Pic05.png"
+                        ]
+                    }
                 ]
             },
             {
-                id: 4,
-                name: "Kaffir",
-                description: "Cerámica 10cm | 330g por Unidad | Caja Master 53.5x30x35cm 14kg",
-                capacity: "350ml",
-                price: 3.90,
-                images: [
-                    "./assets/04.Kaffir/Pic01.png",
-                    "./assets/04.Kaffir/Pic02.png",
-                    "./assets/04.Kaffir/Pic03.png",
-                    "./assets/04.Kaffir/Caracteristicas.png"
+                id: "tazas",
+                categoryName: "4. Tazas",
+                requiresCapacity: true,
+                products: [
+                    {
+                        id: 1,
+                        name: "Kantol",
+                        description: "Metal 7.9cm | 72g por Unidad | Caja Master 52x46x20cm 6kg",
+                        capacity: "380ml",
+                        minUnits: 100,
+                        price: 3,
+                        images: [
+                            "./assets/04.Tazas/01.Kantol/Pic01.png",
+                            "./assets/04.Tazas/01.Kantol/Pic02.png",
+                            "./assets/04.Tazas/01.Kantol/Pic03.png",
+                            "./assets/04.Tazas/01.Kantol/Pic05.png",
+                            "./assets/04.Tazas/01.Kantol/Caracteristicas.png"
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Werdan",
+                        description: "Cerámica 9.6cm | 320g por Unidad | Caja Master 48x33x28cm 14kg",
+                        capacity: "350ml",
+                        minUnits: 100,
+                        price: 2.85,
+                        images: [
+                            "./assets/04.Tazas/02.Wesdarm/Pic01.png",
+                            "./assets/04.Tazas/02.Wesdarm/Pic02.png",
+                            "./assets/04.Tazas/02.Wesdarm/Pic03.png",
+                            "./assets/04.Tazas/02.Wesdarm/Pic04.png",
+                            "./assets/04.Tazas/02.Wesdarm/Pic05.png",
+                            "./assets/04.Tazas/02.Wesdarm/Caracteristicas.png"
+                        ]
+                    },
+                    {
+                        id: 3,
+                        name: "Harnet",
+                        description: "Cerámica 9.6cm | 320g por Unidad | Caja Master 48x32x27.5cm 13kg",
+                        capacity: "350ml",
+                        minUnits: 100,
+                        price: 2.95,
+                        images: [
+                            "./assets/04.Tazas/03.Harnet/Pic01.png",
+                            "./assets/04.Tazas/03.Harnet/Pic02.png",
+                            "./assets/04.Tazas/03.Harnet/Pic03.png",
+                            "./assets/04.Tazas/03.Harnet/Caracteristicas.png"
+                        ]
+                    },
+                    {
+                        id: 4,
+                        name: "Kaffir",
+                        description: "Cerámica 10cm | 330g por Unidad | Caja Master 53.5x30x35cm 14kg",
+                        capacity: "350ml",
+                        minUnits: 100,
+                        price: 3.90,
+                        images: [
+                            "./assets/04.Tazas/04.Kaffir/Pic01.png",
+                            "./assets/04.Tazas/04.Kaffir/Pic02.png",
+                            "./assets/04.Tazas/04.Kaffir/Pic03.png",
+                            "./assets/04.Tazas/04.Kaffir/Caracteristicas.png"
+                        ]
+                    },
+                    {
+                        id: 5,
+                        name: "Amira",
+                        description: "Cristal 9.6cm | 338g por Unidad | Caja Master 46x32.3x26.5cm 12.7kg",
+                        capacity: "350ml",
+                        minUnits: 100,
+                        price: 3.20,
+                        images: [
+                            "./assets/04.Tazas/05.Amira/Pic01.png",
+                            "./assets/04.Tazas/05.Amira/Pic02.png",
+                            "./assets/04.Tazas/05.Amira/Pic03.png",
+                            "./assets/04.Tazas/05.Amira/Pic05.png",
+                            "./assets/04.Tazas/05.Amira/Pic06.png",
+                            "./assets/04.Tazas/05.Amira/Pic07.png",
+                            "./assets/04.Tazas/05.Amira/Caracteristicas.png"
+                        ]
+                    },
+                    {
+                        id: 6,
+                        name: "Nala",
+                        description: "Cerámica/Corcho 10.2cm | 340g por Unidad | Caja Master 47.5x38.5x28.5cm 14.8kg",
+                        capacity: "350ml",
+                        minUnits: 100,
+                        price: 3.80,
+                        images: [
+                            "./assets/04.Tazas/06.Nala/Pic01.png",
+                            "./assets/04.Tazas/06.Nala/Pic02.png",
+                            "./assets/04.Tazas/06.Nala/Pic03.png",
+                            "./assets/04.Tazas/06.Nala/Pic04.png",
+                            "./assets/04.Tazas/06.Nala/Pic05.png",
+                            "./assets/04.Tazas/06.Nala/Caracteristicas.png"
+                        ]
+                    },
+                    {
+                        id: 7,
+                        name: "Roset",
+                        description: "Cerámica/Corcho 11cm | 420g por Unidad | Caja Master 51x38x30.5cm 16kg",
+                        capacity: "420ml",
+                        minUnits: 100,
+                        price: 4.30,
+                        images: [
+                            "./assets/04.Tazas/07.Roset/Pic01.png",
+                            "./assets/04.Tazas/07.Roset/Pic02.png",
+                            "./assets/04.Tazas/07.Roset/Pic03.png"
+                        ]
+                    },
+                    {
+                        id: 8,
+                        name: "Beesbur",
+                        description: "Acero Inoxidable 8cm | 113g por Unidad | Caja Master 49x28x32cm 14kg",
+                        capacity: "220ml",
+                        minUnits: 100,
+                        price: 4.30,
+                        images: [
+                            "./assets/04.Tazas/08.Beesbur/Pic01.png",
+                            "./assets/04.Tazas/08.Beesbur/Pic02.png",
+                            "./assets/04.Tazas/08.Beesbur/Pic03.png",
+                            "./assets/04.Tazas/08.Beesbur/Pic04.png",
+                            "./assets/04.Tazas/08.Beesbur/Pic05.png",
+                            "./assets/04.Tazas/08.Beesbur/Pic06.png",
+                            "./assets/04.Tazas/08.Beesbur/Caracteristicas.png"
+                        ]
+                    }
                 ]
             },
             {
-                id: 5,
-                name: "Amira",
-                description: "Cristal 9.6cm | 338g por Unidad | Caja Master 46x32.3x26.5cm 12.7kg",
-                capacity: "350ml",
-                price: 3.20,
-                images: [
-                    "./assets/05.Amira/Pic01.png",
-                    "./assets/05.Amira/Pic02.png",
-                    "./assets/05.Amira/Pic03.png",
-                    "./assets/05.Amira/Pic05.png",
-                    "./assets/05.Amira/Pic06.png",
-                    "./assets/05.Amira/Pic07.png",
-                    "./assets/05.Amira/Caracteristicas.png"
+                id: "huchas",
+                categoryName: "5. Huchas",
+                requiresCapacity: false,
+                products: [
+                    {
+                        id: 501,
+                        name: "Darfil",
+                        description: "Fibra de Bambú/ABS | Medidas 10x7.1x6.8 cm | Peso 36 gr",
+                        minUnits: 100,
+                        price: 2.11,
+                        images: [
+                            "./assets/05.Huchas/01.DARFIL/Pic01.png",
+                            "./assets/05.Huchas/01.DARFIL/Pic02.png",
+                            "./assets/05.Huchas/01.DARFIL/Pic03.png",
+                            "./assets/05.Huchas/01.DARFIL/Pic04.png",
+                            "./assets/05.Huchas/01.DARFIL/Pic05.png"
+                        ]
+                    },
+                    {
+                        id: 502,
+                        name: "Jasara",
+                        description: "Material: Madera | Medidas: 17.5x3x12.5 cm | Peso: 205 gr",
+                        minUnits: 100,
+                        price: 4.95,
+                        images: [
+                            "./assets/05.Huchas/02.JASARA/Pic02.png",
+                            "./assets/05.Huchas/02.JASARA/Pic03.png",
+                            "./assets/05.Huchas/02.JASARA/Pic01.png",
+                            "./assets/05.Huchas/02.JASARA/Pic04.png",
+                            "./assets/05.Huchas/02.JASARA/Pic05.png"
+                        ]
+                    }
                 ]
             },
             {
-                id: 6,
-                name: "Nala",
-                description: "Cerámica/Corcho 10.2cm | 340g por Unidad | Caja Master 47.5x38.5x28.5cm 14.8kg",
-                capacity: "350ml",
-                price: 3.80,
-                images: [
-                    "./assets/06.Nala/Pic01.png",
-                    "./assets/06.Nala/Pic02.png",
-                    "./assets/06.Nala/Pic03.png",
-                    "./assets/06.Nala/Pic04.png",
-                    "./assets/06.Nala/Pic05.png",
-                    "./assets/06.Nala/Caracteristicas.png"
+                id: "portabocadillos",
+                categoryName: "6. Portabocadillos",
+                requiresCapacity: false,
+                products: [
+                    {
+                        id: 601,
+                        name: "Rufus",
+                        description: "PVC/Aluminio | Medidas 21x7.5x8 cm | Peso 45 gr",
+                        minUnits: 100,
+                        price: 2.05,
+                        images: [
+                            "./assets/06.Portabocadillos/01.RUFUS/Pic01.png",
+                            "./assets/06.Portabocadillos/01.RUFUS/Pic02.png",
+                            "./assets/06.Portabocadillos/01.RUFUS/Pic03.png",
+                            "./assets/06.Portabocadillos/01.RUFUS/Pic05.png",
+                            "./assets/06.Portabocadillos/01.RUFUS/Pic06.png"
+                        ]
+                    },
+                    {
+                        id: 602,
+                        name: "Neskort",
+                        description: "Poliéster 600D RPET/Aluminio | Medidas 21x7.5x8 cm | Peso 50 gr",
+                        minUnits: 100,
+                        price: 4.93,
+                        images: [
+                            "./assets/06.Portabocadillos/02.NESKORT/Pic01.png",
+                            "./assets/06.Portabocadillos/02.NESKORT/Pic02.png",
+                            "./assets/06.Portabocadillos/02.NESKORT/Pic03.png",
+                            "./assets/06.Portabocadillos/02.NESKORT/Pic04.png",
+                            "./assets/06.Portabocadillos/02.NESKORT/Pic05.png",
+                            "./assets/06.Portabocadillos/02.NESKORT/Pic06.png"
+                        ]
+                    }
                 ]
             },
             {
-                id: 7,
-                name: "Roset",
-                description: "Cerámica/Corcho 11cm | 420g por Unidad | Caja Master 51x38x30.5cm 16kg",
-                capacity: "420ml",
-                price: 4.30,
-                images: [
-                    "./assets/07.Roset/Pic01.png",
-                    "./assets/07.Roset/Pic02.png",
-                    "./assets/07.Roset/Pic03.png"
+                id: "bidones",
+                categoryName: "7. Bidones",
+                requiresCapacity: true,
+                products: [
+                    {
+                        id: 701,
+                        name: "Fecher",
+                        description: "Aluminio | Largo 20.8 cm | Peso 80 gr",
+                        capacity: "500ml",
+                        minUnits: 200,
+                        price: 2.9,
+                        images: [
+                            "./assets/07.Bidones/01.FECHER/Pic01.png",
+                            "./assets/07.Bidones/01.FECHER/Pic02.png",
+                            "./assets/07.Bidones/01.FECHER/Pic03.png",
+                            "./assets/07.Bidones/01.FECHER/Pic04.png",
+                            "./assets/07.Bidones/01.FECHER/Pic05.png",
+                            "./assets/07.Bidones/01.FECHER/Pic06.png",
+                            "./assets/07.Bidones/01.FECHER/Pic07.png"
+                        ]
+                    }
                 ]
             },
             {
-                id: 8,
-                name: "Beesbur",
-                description: "Acero Inoxidable 8cm | 113g por Unidad | Caja Master 49x28x32cm 14kg",
-                capacity: "220ml",
-                price: 4.30,
-                images: [
-                    "./assets/08.Beesbur/Pic01.png",
-                    "./assets/08.Beesbur/Pic02.png",
-                    "./assets/08.Beesbur/Pic03.png",
-                    "./assets/08.Beesbur/Pic04.png",
-                    "./assets/08.Beesbur/Pic05.png",
-                    "./assets/08.Beesbur/Pic06.png",
-                    "./assets/08.Beesbur/Caracteristicas.png"
+                id: "lotes",
+                categoryName: "8. Lotes",
+                requiresCapacity: false,
+                products: [
+                    {
+                        id: 801,
+                        name: "Wellenchen",
+                        description: "Lote especial para peñas. Incluye set de dental LOWCHEN y taza personalizada.",
+                        minUnits: 100,
+                        price: 3.95,
+                        images: [
+                            "./assets/08.LoteTazaSet/01.WILLENCHEN/Pic001.png",
+                            "./assets/08.LoteTazaSet/01.WILLENCHEN/Pic01.png",
+                            "./assets/08.LoteTazaSet/01.WILLENCHEN/Pic02.png",
+                            "./assets/08.LoteTazaSet/01.WILLENCHEN/Pic03.png",
+                            "./assets/08.LoteTazaSet/01.WILLENCHEN/Pic04.png",
+                            "./assets/08.LoteTazaSet/01.WILLENCHEN/Pic05.png",
+                            "./assets/08.LoteTazaSet/01.WILLENCHEN/Pic06.png",
+                            "./assets/08.LoteTazaSet/01.WILLENCHEN/Pic07.png",
+                            "./assets/08.LoteTazaSet/01.WILLENCHEN/Pic08.png",
+                            "./assets/08.LoteTazaSet/01.WILLENCHEN/Pic09.png",
+                            "./assets/08.LoteTazaSet/01.WILLENCHEN/Pic10.png"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "gorras",
+                categoryName: "9. Gorras",
+                requiresCapacity: false,
+                products: [
+                    {
+                        id: 901,
+                        name: "Dibux",
+                        description: "Poliéster RPET | Peso: 44g",
+                        minUnits: 200,
+                        price: 2.7,
+                        images: [
+                            "./assets/09.Gorras/01.Dibux/Pic01.png",
+                            "./assets/09.Gorras/01.Dibux/Pic02.png",
+                            "./assets/09.Gorras/01.Dibux/Pic03.png",
+                            "./assets/09.Gorras/01.Dibux/Pic04.png",
+                            "./assets/09.Gorras/01.Dibux/Pic05.png",
+                            "./assets/09.Gorras/01.Dibux/Pic06.png",
+                        ]
+                    },
+                    {
+                        id: 902,
+                        name: "Brauner",
+                        description: "Algodón Reciclado | Peso 70 gr",
+                        minUnits: 200,
+                        price: 2.65,
+                        images: [
+                            "./assets/09.Gorras/02.Brauner/Pic01.png",
+                            "./assets/09.Gorras/02.Brauner/Pic02.png",
+                            "./assets/09.Gorras/02.Brauner/Pic03.png",
+                            "./assets/09.Gorras/02.Brauner/Pic04.png",
+                            "./assets/09.Gorras/02.Brauner/Pic05.png",
+                            "./assets/09.Gorras/02.Brauner/Pic06.png",
+                            "./assets/09.Gorras/02.Brauner/Pic07.png"
+                        ]
+                    },
+                    {
+                        id: 903,
+                        name: "Calipso",
+                        description: "Algodón Orgánico | Peso 70 gr",
+                        minUnits: 200,
+                        price: 2.85,
+                        images: [
+                            "./assets/09.Gorras/03.Calipso/Pic01.png",
+                            "./assets/09.Gorras/03.Calipso/Pic02.png",
+                            "./assets/09.Gorras/03.Calipso/Pic03.png",
+                            "./assets/09.Gorras/03.Calipso/Pic04.png",
+                            "./assets/09.Gorras/03.Calipso/Pic05.png",
+                            "./assets/09.Gorras/03.Calipso/Pic06.png",
+                            "./assets/09.Gorras/03.Calipso/Pic07.png",
+                            "./assets/09.Gorras/03.Calipso/Pic08.png"
+                        ]
+                    },
+                    {
+                        id: 904,
+                        name: "Sport",
+                        description: "Algodón | Peso 40 gr",
+                        minUnits: 200,
+                        price: 1.800,
+                        images: [
+                            "./assets/09.Gorras/04.Sport/Pic01.png",
+                            "./assets/09.Gorras/04.Sport/Pic02.png",
+                            "./assets/09.Gorras/04.Sport/Pic03.png",
+                            "./assets/09.Gorras/04.Sport/Pic04.png",
+                            "./assets/09.Gorras/04.Sport/Pic05.png",
+                            "./assets/09.Gorras/04.Sport/Pic06.png",
+                            "./assets/09.Gorras/04.Sport/Pic07.png"
+                        ]
+                    },
+                    {
+                        id: 905,
+                        name: "Krox",
+                        description: "Microfibra y Poliéster | Peso: 45g",
+                        minUnits: 200,
+                        price: 1.90,
+                        images: [
+                            "./assets/09.Gorras/05.Krox/Pic01.png",
+                            "./assets/09.Gorras/05.Krox/Pic02.png",
+                            "./assets/09.Gorras/05.Krox/Pic03.png",
+                            "./assets/09.Gorras/05.Krox/Pic04.png",
+                            "./assets/09.Gorras/05.Krox/Pic05.png",
+                            "./assets/09.Gorras/05.Krox/Pic06.png",
+                            "./assets/09.Gorras/05.Krox/Pic07.png"
+                        ]
+                    },
+                    {
+                        id: 906,
+                        name: "Dispart",
+                        description: "Poliéster | Peso 80 gr",
+                        minUnits: 200,
+                        price: 3.50,
+                        images: [
+                            "./assets/09.Gorras/06.Dispart/Pic01.png",
+                            "./assets/09.Gorras/06.Dispart/Pic02.png",
+                            "./assets/09.Gorras/06.Dispart/Pic03.png",
+                            "./assets/09.Gorras/06.Dispart/Pic04.png",
+                            "./assets/09.Gorras/06.Dispart/Pic05.png",
+                            "./assets/09.Gorras/06.Dispart/Pic06.png"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "jarra-cerveza",
+                categoryName: "10. Jarra Cerveza",
+                requiresCapacity: true,
+                products: [
+                    {
+                        id: 1001,
+                        name: "Reggio",
+                        description: "Cerámica | Largo 12.7 cm | Peso 505 gr",
+                        capacity: "500ml",
+                        minUnits: 100,
+                        price: 4.5,
+                        images: [
+                            "./assets/10.Jarras/01.Reggio/Pic01.png",
+                            "./assets/10.Jarras/01.Reggio/Pic02.png",
+                            "./assets/10.Jarras/01.Reggio/Pic03.png"
+                        ]
+                    },
+                    {
+                        id: 1002,
+                        name: "Heim",
+                        description: "Cerámica | Largo 13.8 cm | Peso 740 gr",
+                        capacity: "700ml",
+                        minUnits: 100,
+                        price: 4.60,
+                        images: [
+                            "./assets/10.Jarras/02.Heim/Pic01.png",
+                            "./assets/10.Jarras/02.Heim/Pic02.png",
+                            "./assets/10.Jarras/02.Heim/Pic03.png"
+                        ]
+                    },
+                    {
+                        id: 1003,
+                        name: "Oxia",
+                        description: "Cristal | Largo 13.8 cm | Peso 740 gr",
+                        capacity: "500ml",
+                        minUnits: 100,
+                        price: 4.10,
+                        images: [
+                            "./assets/10.Jarras/03.Oxia/Pic01.png",
+                            "./assets/10.Jarras/03.Oxia/Pic02.png",
+                            "./assets/10.Jarras/03.Oxia/Pic03.png",
+                            "./assets/10.Jarras/03.Oxia/Pic04.png",
+                            "./assets/10.Jarras/03.Oxia/Pic05.png",
+                            "./assets/10.Jarras/03.Oxia/Pic06.png"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "cubos",
+                categoryName: "11. Cubos",
+                requiresCapacity: true,
+                products: [
+                    {
+                        id: 1101,
+                        name: "Blake",
+                        description: "Metal | Largo 18.5 cm | Peso 375 gr",
+                        capacity: "6L",
+                        minUnits: 100,
+                        price: 4.00,
+                        images: [
+                            "./assets/11.Cubos/01.Blake/Pic01.png",
+                            "./assets/11.Cubos/01.Blake/Pic02.png"
+                        ]
+                    },
+                    {
+                        id: 1102,
+                        name: "Yuzux",
+                        description: "Metal | Medidas 32x20.5x15 cm | Peso 440 gr",
+                        capacity: "6L",
+                        minUnits: 100,
+                        price: 4.25,
+                        images: [
+                            "./assets/11.Cubos/02.Yuzux/Pic01.png",
+                            "./assets/11.Cubos/02.Yuzux/Pic02.png",
+                            "./assets/11.Cubos/02.Yuzux/Pic03.png"
+                        ]
+                    },
+                    {
+                        id: 1103,
+                        name: "Duken",
+                        description: "Artículo Metálico | Longitud 18.5 cm | 375 gramos",
+                        capacity: "6L",
+                        minUnits: 100,
+                        price: 4.30,
+                        images: [
+                            "./assets/11.Cubos/03.Duken/Pic01.png",
+                            "./assets/11.Cubos/03.Duken/Pic02.png"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "gorros",
+                categoryName: "12. Gorros",
+                requiresCapacity: false,
+                products: [
+                    {
+                        id: 1201,
+                        name: "Simiut",
+                        description: "Exterior Poliéster / Interior Poliéster Micropolar | Peso 75 gr",
+                        minUnits: 100,
+                        price: 4.20,
+                        images: [
+                            "./assets/12.Gorros/01.Simiut/Pic01.png",
+                            "./assets/12.Gorros/01.Simiut/Pic02.png"
+                        ]
+                    },
+                    {
+                        id: 1202,
+                        name: "Holsen",
+                        description: "Acrílico | Peso 40 gr",
+                        minUnits: 100,
+                        price: 2.50,
+                        images: [
+                            "./assets/12.Gorros/02.Holsen/Pic01.png"
+                        ]
+                    },
+                    {
+                        id: 1203,
+                        name: "Selsoker",
+                        description: "Acrílico | Peso 45 gr",
+                        minUnits: 100,
+                        price: 3.10,
+                        images: [
+                            "./assets/12.Gorros/03.Selsoker/Pic01.png"
+                        ]
+                    },
+                    {
+                        id: 1204,
+                        name: "Folten",
+                        description: "Acrílico | Peso 45 gr",
+                        minUnits: 100,
+                        price: 3.90,
+                        images: [
+                            "./assets/12.Gorros/04.Folten/Pic01.png",
+                            "./assets/12.Gorros/04.Folten/Pic02.png",
+                            "./assets/12.Gorros/04.Folten/Pic03.png"
+                        ]
+                    },
+                    {
+                        id: 1205,
+                        name: "Prasan",
+                        description: "Set de gorro y guantes | Acrílico",
+                        minUnits: 100,
+                        price: 7.20,
+                        images: [
+                            "./assets/12.Gorros/05.Prasan/Pic01.png"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "braga-cuello",
+                categoryName: "13. Braga Cuello",
+                requiresCapacity: false,
+                products: [
+                    {
+                        id: 1301,
+                        name: "Rehony",
+                        description: "Exterior Poliéster + Interior Micropolar 300g/m² | Medidas 25x25 cm | Peso 60 gr",
+                        minUnits: 100,
+                        price: 3.50,
+                        images: [
+                            "./assets/13.BragaCuello/01.Rehony/Pic01.png"
+                        ]
+                    },
+                    {
+                        id: 1302,
+                        name: "Dolberg",
+                        description: "Acrílico 430 g/m² | Medidas 25x38 cm | Peso 100 gr",
+                        minUnits: 100,
+                        price: 7.00,
+                        images: [
+                            "./assets/13.BragaCuello/02.Dolberg/Pic01.png",
+                            "./assets/13.BragaCuello/02.Dolberg/Pic02.png",
+                            "./assets/13.BragaCuello/02.Dolberg/Pic03.png",
+                            "./assets/13.BragaCuello/02.Dolberg/Pic04.png"
+                        ]
+                    },
+                    {
+                        id: 1303,
+                        name: "Suanix",
+                        description: "Poliéster RPET 130 g/m² | Medidas 25x50 cm | Peso 35 gr",
+                        minUnits: 100,
+                        price: 2.95,
+                        images: [
+                            "./assets/13.BragaCuello/03.Suanix/Pic01.png",
+                            "./assets/13.BragaCuello/03.Suanix/Pic02.png",
+                            "./assets/13.BragaCuello/03.Suanix/Pic03.png"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "baberos",
+                categoryName: "14. Baberos",
+                requiresCapacity: false,
+                products: [
+                    {
+                        id: 1401,
+                        name: "Turam",
+                        description: "Poliéster | Medidas 33x37 cm | Peso 24 gr",
+                        minUnits: 100,
+                        price: 2.20,
+                        images: [
+                            "./assets/14.Baberos/01.Turam/Pic01.png",
+                            "./assets/14.Baberos/01.Turam/Pic02.png"
+                        ]
+                    },
+                    {
+                        id: 1402,
+                        name: "Marlin",
+                        description: "Poliéster | Medidas 34x37 cm | Peso 32 gr",
+                        minUnits: 100,
+                        price: 3.60,
+                        images: [
+                            "./assets/14.Baberos/02.Marlin/Pic01.png",
+                            "./assets/14.Baberos/02.Marlin/Pic02.png"
+                        ]
+                    },
+                    {
+                        id: 1403,
+                        name: "Ruby",
+                        description: "Algodón/PEVA | Medidas 19.5x27 cm | Peso 15 gr",
+                        minUnits: 100,
+                        price: 2.70,
+                        images: [
+                            "./assets/14.Baberos/03.Ruby/Pic01.png",
+                            "./assets/14.Baberos/03.Ruby/Pic02.png"
+                        ]
+                    }
                 ]
             }
         ];
 
-        // DOM Elements
-        const productsGrid = document.getElementById('productsGrid');
+        // --- DOM Elements ---
+        const catalogueContainer = document.getElementById('catalogueContainer');
+        const categoryNav = document.getElementById('categoryNav');
         const productModal = document.getElementById('productModal');
         const closeModal = document.getElementById('closeModal');
         const modalBody = document.getElementById('modalBody');
@@ -863,55 +1632,124 @@
             return price.toFixed(2);
         }
 
-        // Initialize products
-        function initProducts() {
-            productsGrid.innerHTML = '';
+        // Helper function to check if capacity is required (Tazas or Bidones)
+        function isCapacityRequired(categoryId) {
+            return categoryId === 'tazas' || categoryId === 'bidones';
+        }
 
-            products.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.innerHTML = `
-                    <div class="product-image">
-                        <img src="${product.images[0]}" alt="${product.name}">
-                    </div>
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <div class="capacity">Capacidad: ${product.capacity}</div>
-                        <p>${product.description}</p>
-                        <div class="price">
-                            ${formatPrice(product.price)}€
-                            <span class="price-unit">/unidad</span>
+        // --- Initialize Catalogue ---
+        function initCatalogue() {
+            catalogueContainer.innerHTML = '';
+            categoryNav.innerHTML = '';
+
+            catalogueData.forEach((category, categoryIdx) => {
+
+                // 1. Crear botón de navegación
+                const navButton = document.createElement('a');
+                navButton.className = 'category-nav-button';
+                navButton.href = `#category-${category.id}`;
+                navButton.textContent = category.categoryName;
+                categoryNav.appendChild(navButton);
+
+                // 2. Crear la sección de la categoría
+                const categorySection = document.createElement('div');
+                categorySection.className = 'category-section';
+                categorySection.id = `category-${category.id}`;
+
+                // Título de la categoría
+                const categoryTitle = document.createElement('h3');
+                categoryTitle.className = 'category-title';
+                categoryTitle.textContent = category.categoryName;
+                categorySection.appendChild(categoryTitle);
+
+                // Grid de productos para esta categoría
+                const productsGrid = document.createElement('div');
+                productsGrid.className = 'products-grid';
+
+                // Determinar si esta categoría requiere Capacidad
+                const showCapacity = isCapacityRequired(category.id);
+
+                // 3. Crear tarjetas de producto para esta categoría
+                category.products.forEach((product, productIdx) => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+
+                    // Clase especial para las tazas y bidones para ajustar object-fit
+                    const imgFitClass = showCapacity ? 'object-fit-contain' : '';
+
+                    // HTML condicional para la capacidad
+                    const capacityHTML = showCapacity && product.capacity
+                        ? `<div class="details-line"><span class="label">Capacidad:</span><span class="capacity">${product.capacity}</span></div>`
+                        : '';
+
+                    // HTML para las unidades mínimas (obligatorio en todos)
+                    const minUnitsHTML = `<div class="details-line"><span class="label">Min. Unidades:</span><span class="min-units">${product.minUnits}</span></div>`;
+
+
+                    productCard.innerHTML = `
+                        <div class="product-image ${imgFitClass}">
+                            <img src="${product.images[0]}" alt="${product.name}" onerror="this.src='https://placehold.co/400x400/cccccc/999999?text=Imagen+no+disponible'">
                         </div>
-                        <div class="personalization-tag">Personalizable</div>
-                        <a href="#" class="view-details" data-id="${product.id}">Ver Detalles</a>
-                    </div>
-                `;
+                        <div class="product-info">
+                            <h3>${product.name}</h3>
+                            ${capacityHTML}
+                            ${minUnitsHTML}
+                            <p>${product.description}</p>
+                            <div class="price">
+                                ${formatPrice(product.price)}€
+                                <span class="price-unit">/unidad</span>
+                            </div>
+                            <div class="personalization-tag">Personalizable</div>
+                            <a href="#" class="view-details" data-category-id="${category.id}" data-product-idx="${productIdx}">Ver Detalles</a>
+                        </div>
+                    `;
+                    productsGrid.appendChild(productCard);
+                });
 
-                productsGrid.appendChild(productCard);
+                categorySection.appendChild(productsGrid);
+                catalogueContainer.appendChild(categorySection);
             });
 
-            // Add event listeners to view details buttons
+            // 4. Add event listeners a los nuevos botones "Ver Detalles"
             document.querySelectorAll('.view-details').forEach(button => {
-                button.addEventListener('click', function(e) {
+                button.addEventListener('click', function (e) {
                     e.preventDefault();
-                    const productId = parseInt(this.getAttribute('data-id'));
-                    const product = products.find(p => p.id === productId);
+                    const categoryId = this.getAttribute('data-category-id');
+                    const productIdx = parseInt(this.getAttribute('data-product-idx'));
+
+                    // Buscar el producto basado en ID de categoría y índice
+                    const category = catalogueData.find(cat => cat.id === categoryId);
+                    const product = category ? category.products[productIdx] : null;
+
                     if (product) {
-                        openProductModal(product);
+                        openProductModal(product, categoryId);
                     }
                 });
             });
         }
 
-        // Open product modal with carousel
-        function openProductModal(product) {
+        // --- Open Product Modal (Lógica del Modal actualizada) ---
+        function openProductModal(product, categoryId) {
             currentSlide = 0;
+
+            // Determinar si se debe mostrar la Capacidad en el modal
+            const showCapacity = isCapacityRequired(categoryId);
+
+            // HTML condicional para la capacidad en el modal
+            const modalCapacityHTML = showCapacity && product.capacity
+                ? `<div class="modal-details-line">Capacidad: <span class="modal-capacity">${product.capacity}</span></div>`
+                : '';
+
+            // HTML para las unidades mínimas en el modal
+            const modalMinUnitsHTML = `<div class="modal-details-line">Min. Unidades: <span class="modal-min-units">${product.minUnits}</span></div>`;
+
+
             modalBody.innerHTML = `
                 <div class="modal-images">
                     <div class="carousel-container">
                         ${product.images.map((image, index) => `
                             <div class="carousel-slide ${index === 0 ? 'active' : ''}">
-                                <img src="${image}" alt="${product.name}">
+                                <img src="${image}" alt="${product.name}" onerror="this.src='https://placehold.co/400x400/cccccc/999999?text=Imagen+no+disponible'">
                             </div>
                         `).join('')}
                         <button class="carousel-button carousel-prev">&#10094;</button>
@@ -925,7 +1763,8 @@
                 </div>
                 <div class="modal-product-info">
                     <h3>${product.name}</h3>
-                    <div class="capacity">Capacidad: ${product.capacity}</div>
+                    ${modalCapacityHTML}
+                    ${modalMinUnitsHTML}
                     <div class="modal-price">
                         ${formatPrice(product.price)}€
                         <span class="modal-price-unit">/unidad</span>
@@ -935,8 +1774,8 @@
                 </div>
                 <div class="modal-contact-cta">
                     <h4>¿Te interesa este modelo?</h4>
-                    <p>Perfecto para regalar a socios, jugadores o para tu colección personal. Contacta con nosotros para recibir información sobre precios, cantidades mínimas y opciones de personalización.</p>
-                    <a href="mailto:direccion.general@merchandream.es?subject=Consulta sobre ${product.name} - Unionistas CF&body=Hola, me interesa recibir información sobre la ${product.name} para Unionistas CF.%0D%0A%0D%0ACantidad aproximada:%0D%0A%0D%0AInformación adicional:%0D%0A" class="cta-button">Solicitar Información</a>
+                    <p>Con ${product.minUnits} unidades mínimas, puedes personalizar completamente este producto.</p>
+                    <a href="mailto:direccion.general@merchandream.es?subject=Consulta sobre ${product.name} - Unionistas CF&body=Hola, me interesa recibir información sobre la ${product.name} para Unionistas CF.%0D%0A%0D%0ACantidad aproximada: (Mínimo ${product.minUnits})%0D%0A%0D%0AInformación adicional:%0D%0A" class="cta-button">Solicitar Información</a>
                 </div>
             `;
 
@@ -984,12 +1823,11 @@
             });
         }
 
-        // Close modal
+        // --- Event Listeners para cerrar el Modal ---
         closeModal.addEventListener('click', () => {
             productModal.style.display = 'none';
         });
 
-        // Close modal when clicking outside
         productModal.addEventListener('click', (e) => {
             if (e.target === productModal) {
                 productModal.style.display = 'none';
@@ -997,7 +1835,8 @@
         });
 
         // Initialize the page
-        document.addEventListener('DOMContentLoaded', initProducts);
+        document.addEventListener('DOMContentLoaded', initCatalogue);
     </script>
 </body>
+
 </html>
